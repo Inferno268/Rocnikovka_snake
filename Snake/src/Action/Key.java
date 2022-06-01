@@ -12,31 +12,33 @@ public class Key extends KeyAdapter {
         this.panel = panel;
     }
     public void keyPressed(KeyEvent e){
-        switch (e.getKeyCode()){
-            case KeyEvent.VK_LEFT:
-                if (panel.getDirection() != 'R'){
-                    panel.setDirection('L');
-                }
-                break;
-            case KeyEvent.VK_RIGHT:
-                if (panel.getDirection() != 'L'){
-                    panel.setDirection('R');
-                }
-                break;
-            case KeyEvent.VK_UP:
-                if (panel.getDirection() != 'D'){
-                    panel.setDirection('U');
-                }
-                break;
-            case KeyEvent.VK_DOWN:
-                if (panel.getDirection() != 'U'){
-                    panel.setDirection('D');
-                }
-                break;
-            case KeyEvent.VK_R:
-                if (!panel.isRunning()){
-
-                }
+        if (panel.isRunning()) {
+            switch (e.getKeyCode()) {
+                case KeyEvent.VK_LEFT:
+                    if (panel.getDirection() != 'R') {
+                        panel.setDirection('L');
+                    }
+                    break;
+                case KeyEvent.VK_RIGHT:
+                    if (panel.getDirection() != 'L') {
+                        panel.setDirection('R');
+                    }
+                    break;
+                case KeyEvent.VK_UP:
+                    if (panel.getDirection() != 'D') {
+                        panel.setDirection('U');
+                    }
+                    break;
+                case KeyEvent.VK_DOWN:
+                    if (panel.getDirection() != 'U') {
+                        panel.setDirection('D');
+                    }
+                    break;
+                case KeyEvent.VK_SPACE:
+                   if (!panel.isRunning()){
+                       panel.startGame();
+                   }
+            }
         }
     }
 }

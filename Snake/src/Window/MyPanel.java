@@ -4,12 +4,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import java.sql.Time;
 import java.util.Random;
 
-public class MyPanel extends JPanel implements ActionListener  {
+public class MyPanel extends JPanel implements ActionListener, Runnable  {
 
     static final int WIDTH = 700;
     static final int HEIGHT = 700;
@@ -23,13 +20,22 @@ public class MyPanel extends JPanel implements ActionListener  {
     int applex;
     int appley;
     public char direction = 'R';
-    boolean running;
-    Timer timer;
+    boolean running= false;
+    final Font font = new Font("Comic sans", Font.BOLD, 25);
+    public Timer timer;
     Key key = new Key(this);
     Random rd = new Random();
-
+    public Thread t1 = new Thread(this);
     public void setDirection(char direction) {
         this.direction = direction;
+    }
+
+    public void setTimer(Timer timer) {
+        this.timer = timer;
+    }
+
+    public Timer getTimer() {
+        return timer;
     }
 
     public char getDirection() {
@@ -46,17 +52,19 @@ public class MyPanel extends JPanel implements ActionListener  {
     }
 
     public MyPanel(){
-    this.setPreferredSize(new Dimension(WIDTH,HEIGHT));
-    this.setBackground(Color.black);
-    this.setFocusable(true);
-    this.addKeyListener(key);
-    startGame ();
+        this.setPreferredSize(new Dimension(WIDTH,HEIGHT));
+        this.setBackground(Color.black);
+        this.setFocusable(true);
+        this.addKeyListener(key);
+        startGame();
     }
     public void startGame(){
     apple();
+    body =4;
     running =true;
     timer = new Timer(DELAY,this);
     timer.start();
+
 
 
     }
@@ -68,10 +76,7 @@ public class MyPanel extends JPanel implements ActionListener  {
 
         public void draw(Graphics g){
         if(running){
-            for(int i =0; i<HEIGHT/TILE; i++){
-                g.drawLine(i*TILE,0,i*TILE,HEIGHT);
-                g.drawLine(0,i*TILE,WIDTH,i*TILE);
-            }
+
             g.setColor(Color.red);
             g.fillOval(applex,appley,TILE,TILE);
 
@@ -85,13 +90,13 @@ public class MyPanel extends JPanel implements ActionListener  {
                     g.fillRect(x[i],y[i], TILE,TILE);
                 }
             }
-            g.setColor(Color.red);
-            g.setFont(new Font("Ink Free",Font.BOLD,40));
+            g.setColor(Color.white);
+            g.setFont(font);
             FontMetrics metrics = getFontMetrics(g.getFont());
             g.drawString("SCORE:"+ apples,( WIDTH - metrics.stringWidth("SCORE:"))/2,g.getFont().getSize());
         }
         else{
-            end(g);
+           end(g);
         }
     }
     public void apple(){
@@ -102,28 +107,29 @@ public class MyPanel extends JPanel implements ActionListener  {
 
 
     public void move(){
-    for(int i=body; i>0; i--) {
-        x[i] = x[i - 1];
-        y[i] = y[i - 1];
-    }
+        for(int i=body; i>0; i--) {
+            x[i] = x[i - 1];
+            y[i] = y[i - 1];
+        }
+
 
     System.out.println(direction);
 
-    switch  (direction){
-        case 'U':
-            y[0] = y[0] - TILE;
-            break;
-        case 'D':
-            y[0] = y[0] + TILE;
-            break;
-        case 'L':
-            x[0] = x[0] - TILE;
-            break;
-        case 'R':
-            x[0] = x[0] + TILE;
-            break;
+        switch  (direction){
+            case 'U':
+                y[0] = y[0] - TILE;
+                break;
+            case 'D':
+                y[0] = y[0] + TILE;
+                break;
+            case 'L':
+                x[0] = x[0] - TILE;
+                break;
+            case 'R':
+                x[0] = x[0] + TILE;
+                break;
 
-    }
+        }
     }
 
     public void check(){
@@ -136,46 +142,42 @@ public class MyPanel extends JPanel implements ActionListener  {
     public void collison(){
         for (int i = body; i>0; i--){
             if ((x[0] == x[i]) && (y[0] == y[i])){
-                running =false;
+                body=1;
+                break;
             }
         }
-            if (x[0] < 0){
-                running=false;
-            }
-            if (x[0] > WIDTH){
-                running=false;
-            }
-            if (y[0] < 0){
-                running=false;
-            }
-            if (y[0] > HEIGHT){
-                running = false;
+            if (x[0] < 0 || x[0] > WIDTH || y[0] < 0 || y[0] > HEIGHT)  {
+                body=1;
+                y[0] = rd.nextInt();
+                y[0] = rd.nextInt();
             }
             if (!running){
                 timer.stop();
             }
 
     }
-
     public void end(Graphics g){
-        g.setColor(Color.red);
-        g.setFont(new Font("Ink Free",Font.BOLD,75));
-        FontMetrics metrics = getFontMetrics(g.getFont());
-        g.drawString("GAME OVER",( WIDTH - metrics.stringWidth("GAME OVER"))/2,HEIGHT/2);
+        String endText = "The end. Your score was: " + apples + " Press anything to reset";
+        g.setColor(Color.white);
+        g.setFont(font);
+        g.drawString(endText,(WIDTH-getFontMetrics(g.getFont()).stringWidth(endText))/2,HEIGHT/2);
+
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-    if(running){
+        if(running){
         move();
         check();
         collison();
-        for (int i=0; i<x.length;i++){
-            System.out.println(x[i]);
-        }
 
     }
     repaint();
+    }
+
+    @Override
+    public void run() {
+
     }
 
 }
