@@ -3,9 +3,10 @@ import Window.MyFrame;
 import Window.MyPanel;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         //MyFrame frame = new MyFrame();
         //frame.create();
-        new MainMenu();
+        MainMenu menu = new MainMenu();
+        menu.thread();
     }
 }

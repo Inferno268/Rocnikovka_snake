@@ -6,7 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Random;
 
-public class MyPanel extends JPanel implements ActionListener, Runnable  {
+public class MyPanel extends JPanel implements ActionListener{
 
     static final int WIDTH = 700;
     static final int HEIGHT = 700;
@@ -25,7 +25,9 @@ public class MyPanel extends JPanel implements ActionListener, Runnable  {
     public Timer timer;
     Key key = new Key(this);
     Random rd = new Random();
-    public Thread t1 = new Thread(this);
+
+
+
     public void setDirection(char direction) {
         this.direction = direction;
     }
@@ -53,18 +55,18 @@ public class MyPanel extends JPanel implements ActionListener, Runnable  {
 
     public MyPanel(){
         this.setPreferredSize(new Dimension(WIDTH,HEIGHT));
-        this.setBackground(Color.black);
+        this.setBackground(Color.white);
         this.setFocusable(true);
         this.addKeyListener(key);
         startGame();
     }
+
     public void startGame(){
     apple();
     body =4;
     running =true;
     timer = new Timer(DELAY,this);
     timer.start();
-
 
 
     }
@@ -90,7 +92,7 @@ public class MyPanel extends JPanel implements ActionListener, Runnable  {
                     g.fillRect(x[i],y[i], TILE,TILE);
                 }
             }
-            g.setColor(Color.white);
+            g.setColor(Color.black);
             g.setFont(font);
             FontMetrics metrics = getFontMetrics(g.getFont());
             g.drawString("SCORE:"+ apples,( WIDTH - metrics.stringWidth("SCORE:"))/2,g.getFont().getSize());
@@ -142,14 +144,13 @@ public class MyPanel extends JPanel implements ActionListener, Runnable  {
     public void collison(){
         for (int i = body; i>0; i--){
             if ((x[0] == x[i]) && (y[0] == y[i])){
-                body=1;
+                running= false;
                 break;
             }
         }
             if (x[0] < 0 || x[0] > WIDTH || y[0] < 0 || y[0] > HEIGHT)  {
-                body=1;
-                y[0] = rd.nextInt();
-                y[0] = rd.nextInt();
+                running= false;
+
             }
             if (!running){
                 timer.stop();
@@ -158,7 +159,8 @@ public class MyPanel extends JPanel implements ActionListener, Runnable  {
     }
     public void end(Graphics g){
         String endText = "The end. Your score was: " + apples + " Press anything to reset";
-        g.setColor(Color.white);
+        this.setBackground(Color.BLACK);
+        g.setColor(Color.blue);
         g.setFont(font);
         g.drawString(endText,(WIDTH-getFontMetrics(g.getFont()).stringWidth(endText))/2,HEIGHT/2);
 
@@ -175,10 +177,6 @@ public class MyPanel extends JPanel implements ActionListener, Runnable  {
     repaint();
     }
 
-    @Override
-    public void run() {
-
-    }
 
 }
 
