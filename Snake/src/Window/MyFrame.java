@@ -1,12 +1,6 @@
 package Window;
 
-import Menu.MainMenu;
-import Menu.Reset;
-import com.sun.tools.javac.Main;
-
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class MyFrame extends JFrame /*implements Runnable*/ {
   //  public Thread t2;
@@ -24,13 +18,9 @@ public class MyFrame extends JFrame /*implements Runnable*/ {
         this.pack();
         this.setLocationRelativeTo(null);
         this.setVisible(true);
-        System.out.println("Easy");
+
 
     }
 
 
-   /* @Override
-    public void run() {
-        create();
-    }*/
 }
