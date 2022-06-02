@@ -17,8 +17,6 @@ public class MainMenu extends JFrame implements ActionListener,Runnable {
     static final int DELAY = 75;
 
     JButton play = new JButton("Play");
-    MyFrame MyFrame = new MyFrame();
-    MyPanel panel = new MyPanel();
     public Thread t1;
 
     public void thread(){
