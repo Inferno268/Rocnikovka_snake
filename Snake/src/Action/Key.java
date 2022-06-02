@@ -35,10 +35,12 @@ public class Key extends KeyAdapter {
                     }
                     break;
                 case KeyEvent.VK_SPACE:
-                   if (!panel.isRunning()){
-                       panel.startGame();
-                   }
+                    if (!panel.isRunning()){
+                        panel.startGame();
+                    }
             }
+        }else{
+            panel.startGame();
         }
     }
 }

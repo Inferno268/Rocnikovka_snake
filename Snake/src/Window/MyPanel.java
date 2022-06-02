@@ -12,32 +12,22 @@ public class MyPanel extends JPanel implements ActionListener{
     static final int HEIGHT = 700;
     static final int TILE = 25;
     static final int UNITS = ((WIDTH *HEIGHT)/TILE);
-    static final int DELAY = 75;
-    public final int y[] = new int[UNITS];
-    public final int x[] = new int[UNITS];
+    public int DELAY;
+    public int y[] = new int[UNITS];
+    public int x[] = new int[UNITS];
     int body = 4;
     int apples =0;
     int applex;
     int appley;
-    public char direction = 'R';
+    public char direction;
     boolean running= false;
     final Font font = new Font("Comic sans", Font.BOLD, 25);
     public Timer timer;
     Key key = new Key(this);
     Random rd = new Random();
 
-
-
     public void setDirection(char direction) {
         this.direction = direction;
-    }
-
-    public void setTimer(Timer timer) {
-        this.timer = timer;
-    }
-
-    public Timer getTimer() {
-        return timer;
     }
 
     public char getDirection() {
@@ -45,24 +35,25 @@ public class MyPanel extends JPanel implements ActionListener{
 
     }
 
-    public void setRunning(boolean running) {
-        this.running = running;
-    }
-
     public boolean isRunning() {
         return running;
     }
 
-    public MyPanel(){
-        this.setPreferredSize(new Dimension(WIDTH,HEIGHT));
-        this.setBackground(Color.white);
-        this.setFocusable(true);
-        this.addKeyListener(key);
+    public MyPanel(int DELAY){
+        this.DELAY = DELAY;
         startGame();
     }
 
     public void startGame(){
+    this.setPreferredSize(new Dimension(WIDTH,HEIGHT));
+    this.setBackground(Color.white);
+    this.setFocusable(true);
+    this.addKeyListener(key);
+    direction= 'R';
+    x = new int[UNITS];
+    y = new int[UNITS];
     apple();
+    apples = 0;
     body =4;
     running =true;
     timer = new Timer(DELAY,this);
@@ -148,7 +139,7 @@ public class MyPanel extends JPanel implements ActionListener{
                 break;
             }
         }
-            if (x[0] < 0 || x[0] > WIDTH || y[0] < 0 || y[0] > HEIGHT)  {
+            if (x[0] < 0 || x[0] >= WIDTH || y[0] < 0 || y[0] >= HEIGHT)  {
                 running= false;
 
             }

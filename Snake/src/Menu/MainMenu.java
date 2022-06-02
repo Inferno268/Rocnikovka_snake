@@ -17,6 +17,7 @@ public class MainMenu extends JFrame implements ActionListener,Runnable {
     static final int DELAY = 75;
 
     JButton play = new JButton("Play");
+    JButton easy = new JButton("Easy");
     public Thread t1;
 
     public void thread(){
@@ -28,6 +29,9 @@ public class MainMenu extends JFrame implements ActionListener,Runnable {
         play.setBounds(250,250,200,40);
         play.addActionListener(this);
         this.add(play);
+        easy.setBounds(350,80,200,40);
+        easy.addActionListener(this);
+        this.add(easy);
         this.setBackground(Color.black);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setSize(700,700);
@@ -41,8 +45,21 @@ public class MainMenu extends JFrame implements ActionListener,Runnable {
 
         if(e.getSource()==play) {
             this.dispose();
-           new MyFrame();
+           new MyFrame().create(75);
+
         }
+       /* else if(e.getSource()==easy){
+            this.dispose();
+            new MyFrame().create(100);
+        }
+        else if(e.getSource()==easy){
+            this.dispose();
+            new MyFrame().create(100);
+        }
+        else if(e.getSource()==easy){
+            this.dispose();
+            new MyFrame().create(100);
+        }*/
     }
 
     @Override

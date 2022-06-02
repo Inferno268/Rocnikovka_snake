@@ -9,10 +9,14 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class MyFrame extends JFrame /*implements Runnable*/ {
-    MyPanel panel = new MyPanel();
   //  public Thread t2;
 
     public MyFrame(){
+
+    }
+
+    public void create(int delay){
+        MyPanel panel = new MyPanel(delay);
         this.add(panel);
         this.setTitle("Snake");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -20,11 +24,7 @@ public class MyFrame extends JFrame /*implements Runnable*/ {
         this.pack();
         this.setLocationRelativeTo(null);
         this.setVisible(true);
-        System.out.println("fafga");
-    }
-
-    public void create(){
-
+        System.out.println("Easy");
 
     }
 
