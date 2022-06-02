@@ -4,24 +4,17 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.sql.Time;
-
 import Window.MyFrame;
-import Window.MyPanel;
-import com.sun.tools.javac.Main;
+
 
 public class MainMenu extends JFrame implements ActionListener,Runnable {
-
-
-    static final int DELAY = 75;
 
     JButton normal = new JButton("Normal");
     JButton easy = new JButton("Easy");
     JButton very_hard = new JButton("Very Hard");
     JButton hard = new JButton("Hard");
     JButton practice = new JButton("Practice close moves");
-    final Font font = new Font("Comic sans", Font.BOLD, 25);
+    MenuText text = new MenuText();
 
     public Thread t1;
 
@@ -29,7 +22,6 @@ public class MainMenu extends JFrame implements ActionListener,Runnable {
         t1 = new Thread(this);
         t1.start();
     }
-
     public void menu(){
         easy.setBounds(250,200,200,40);
         easy.addActionListener(this);

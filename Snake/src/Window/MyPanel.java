@@ -21,6 +21,8 @@ public class MyPanel extends JPanel implements ActionListener{
     int apples =0;
     int applex;                         //x apple coordinates
     int appley;                         //y apple coordinates
+    int pApplex;                         //x apple coordinates
+    int pAppley;
     public char direction;
     boolean running= false;
 
@@ -60,7 +62,9 @@ public class MyPanel extends JPanel implements ActionListener{
         direction= 'R';
         x = new int[UNITS];
         y = new int[UNITS];
+        poisonApple();
         apple();
+        appleError();
         apples = 0;
         body =4;
         running =true;
@@ -80,6 +84,8 @@ public class MyPanel extends JPanel implements ActionListener{
 //apple
                 g.setColor(Color.red);
                 g.fillOval(applex,appley,TILE,TILE);
+                g.setColor(Color.blue);
+                g.fillOval(pApplex,pAppley,TILE,TILE);
 //snake itself
                 for (int i=0; i<body; i++){
                     if(i == 0){
@@ -107,13 +113,28 @@ public class MyPanel extends JPanel implements ActionListener{
             applex = rd.nextInt((WIDTH/TILE))*TILE;
             appley = rd.nextInt((HEIGHT/TILE))*TILE;
         }
-
+//spawns an poison apple
+        public void poisonApple(){
+            pApplex = rd.nextInt((WIDTH/TILE))*TILE;
+            pAppley = rd.nextInt((HEIGHT/TILE))*TILE;
+        }
+//if both apples spawn at the same coor normal apple will change position
+    public void appleError(){
+            if ((applex== pApplex) && (appley == pAppley)){
+                applex = rd.nextInt((WIDTH/TILE))*TILE;
+                appley = rd.nextInt((HEIGHT/TILE))*TILE;
+            }
+    }
 
 //moving snake
         public void move(){
+            if (body >1){
             for(int i=body; i>0; i--) {
                 x[i] = x[i - 1];
                 y[i] = y[i - 1];
+            }
+            }else{
+                running =false;
             }
 
 
@@ -142,6 +163,11 @@ public class MyPanel extends JPanel implements ActionListener{
             apples++;
             apple();
         }
+            if((x[0] == pApplex) && (y[0] == pAppley)){
+                body--;
+                apples--;
+                poisonApple();
+            }
         }
 //checks if the snake crossed the frame border or if it crashes into itself
     //itself:
