@@ -12,7 +12,7 @@ public class MyPanel extends JPanel implements ActionListener{
     static final int HEIGHT = 700;
     static final int TILE = 25;
     static final int UNITS = ((WIDTH *HEIGHT)/TILE);
-    public int DELAY = 75;   //fps
+    public int DELAY = 75;
     public int y[] = new int[UNITS];    //y snake coordinates
     public int x[] = new int[UNITS];    //x snake coordinates
 
@@ -52,7 +52,7 @@ public class MyPanel extends JPanel implements ActionListener{
             return running;
         }
 
-    //Constructor with int parameter that sets fps, and then start the game
+    //Constructor with int parameter that sets delay, and then start the game
         public MyPanel(int DELAY){
             this.DELAY = DELAY;
             startGame();
@@ -148,9 +148,6 @@ public class MyPanel extends JPanel implements ActionListener{
             }else{
                 running =false;
             }
-
-
-        System.out.println(direction);
 
             switch  (direction){
                 case 'U':

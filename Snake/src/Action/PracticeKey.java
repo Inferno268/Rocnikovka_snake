@@ -13,7 +13,7 @@ public class PracticeKey extends KeyAdapter {
     public PracticeKey(PracticePanel pPanel) {
         this.pPanel = pPanel;
     }
-
+//sets the values of direction
     public void keyPressed(KeyEvent e){
         if (pPanel.isRunning()) {
             switch (e.getKeyCode()) {
@@ -38,6 +38,7 @@ public class PracticeKey extends KeyAdapter {
                     }
                     break;
             }
+//if the game isn't running it will reset on any key input
         }else{
             pPanel.startGame();
         }

@@ -2,13 +2,12 @@ package Window;
 
 import javax.swing.*;
 
-public class MyFrame extends JFrame /*implements Runnable*/ {
-  //  public Thread t2;
+public class MyFrame extends JFrame {
 
     public MyFrame(){
 
     }
-
+//Method with DELAY parameter
     public void create(int delay){
         MyPanel panel = new MyPanel(delay);
         this.add(panel);

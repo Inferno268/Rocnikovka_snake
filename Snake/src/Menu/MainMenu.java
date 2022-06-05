@@ -15,11 +15,12 @@ public class MainMenu extends JFrame implements ActionListener,Runnable {
     JButton hard = new JButton("Hard");
     JButton practice = new JButton("Practice close moves");
     public Thread t1;
-
+//Thread start method
     public void thread(){
         t1 = new Thread(this);
         t1.start();
     }
+//Displays and sets menu frame with all buttons
     public void menu(){
         easy.setBounds(250,200,200,40);
         easy.addActionListener(this);
@@ -48,6 +49,7 @@ public class MainMenu extends JFrame implements ActionListener,Runnable {
         this.setLocationRelativeTo(null);
 
     }
+//This will set the difficulty of the game by changing delay
     @Override
     public void actionPerformed(ActionEvent e) {
 

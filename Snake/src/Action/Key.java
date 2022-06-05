@@ -9,10 +9,10 @@ import java.awt.event.KeyEvent;
 public class Key extends KeyAdapter {
 
     final MyPanel panel;
-    MainMenu menu = new MainMenu();
     public Key(MyPanel panel){
         this.panel = panel;
     }
+//sets the values of direction
     public void keyPressed(KeyEvent e){
         if (panel.isRunning()) {
             switch (e.getKeyCode()) {
@@ -37,6 +37,7 @@ public class Key extends KeyAdapter {
                     }
                     break;
             }
+//if the game isn't running it will reset on any key input
         }else{
            panel.startGame();
         }

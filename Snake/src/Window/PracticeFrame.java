@@ -6,7 +6,7 @@ public class PracticeFrame extends MyFrame{
     public PracticeFrame(){
 
     }
-
+//Creates practice mode frame
     public void create(){
         PracticePanel pPanel = new PracticePanel();
         this.add(pPanel);
