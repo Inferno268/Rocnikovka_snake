@@ -1,5 +1,6 @@
 package Action;
 
+import Menu.MainMenu;
 import Window.MyPanel;
 
 import java.awt.event.KeyAdapter;
@@ -8,6 +9,7 @@ import java.awt.event.KeyEvent;
 public class Key extends KeyAdapter {
 
     final MyPanel panel;
+    MainMenu menu = new MainMenu();
     public Key(MyPanel panel){
         this.panel = panel;
     }
@@ -34,13 +36,9 @@ public class Key extends KeyAdapter {
                         panel.setDirection('D');
                     }
                     break;
-                case KeyEvent.VK_SPACE:
-                    if (!panel.isRunning()){
-                        panel.startGame();
-                    }
             }
         }else{
-            panel.startGame();
+           panel.startGame();
         }
     }
 }
