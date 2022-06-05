@@ -41,7 +41,6 @@ public class MainMenu extends JFrame implements ActionListener,Runnable {
         practice.addActionListener(this);
         this.add(practice);
 
-        this.setBackground(Color.black);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setSize(700,700);
         this.setLayout(null);

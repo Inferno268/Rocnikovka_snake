@@ -37,10 +37,6 @@ public class PracticeKey extends KeyAdapter {
                         pPanel.setDirection('D');
                     }
                     break;
-                case KeyEvent.VK_SPACE:
-                    if (!pPanel.isRunning()){
-                        pPanel.startGame();
-                    }
             }
         }else{
             pPanel.startGame();
