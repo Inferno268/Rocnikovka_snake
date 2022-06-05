@@ -2,16 +2,14 @@ package Window;
 
 import javax.swing.*;
 
-public class MyFrame extends JFrame /*implements Runnable*/ {
-  //  public Thread t2;
-
-    public MyFrame(){
+public class PracticeFrame extends MyFrame{
+    public PracticeFrame(){
 
     }
 
-    public void create(int delay){
-        MyPanel panel = new MyPanel(delay);
-        this.add(panel);
+    public void create(){
+        PracticePanel pPanel = new PracticePanel();
+        this.add(pPanel);
         this.setTitle("Snake");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setResizable(false);
@@ -21,5 +19,4 @@ public class MyFrame extends JFrame /*implements Runnable*/ {
 
 
     }
-
 }

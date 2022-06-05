@@ -12,13 +12,14 @@ public class MyPanel extends JPanel implements ActionListener{
     static final int HEIGHT = 700;
     static final int TILE = 25;
     static final int UNITS = ((WIDTH *HEIGHT)/TILE);
-    public int DELAY;   //fps
+    public int DELAY = 75;   //fps
     public int y[] = new int[UNITS];    //y snake coordinates
     public int x[] = new int[UNITS];    //x snake coordinates
 
 
     int body;
     int apples =0;
+    int bestScore;
     int applex;                         //x apple coordinates
     int appley;                         //y apple coordinates
     int pApplex;                         //x apple coordinates
@@ -34,7 +35,11 @@ public class MyPanel extends JPanel implements ActionListener{
     Key key = new Key(this);
     Random rd = new Random();
 
-//Setters and Getters
+    public MyPanel() {
+    }
+
+
+    //Setters and Getters
         public void setDirection(char direction) {
             this.direction = direction;
         }
@@ -53,7 +58,7 @@ public class MyPanel extends JPanel implements ActionListener{
             startGame();
         }
 
-
+//display JPanel and set whole game
     public void startGame(){
         this.setPreferredSize(new Dimension(WIDTH,HEIGHT));
         this.setBackground(Color.white);
@@ -65,6 +70,7 @@ public class MyPanel extends JPanel implements ActionListener{
         poisonApple();
         apple();
         appleError();
+        checkScore();
         apples = 0;
         body =4;
         running =true;
@@ -124,6 +130,12 @@ public class MyPanel extends JPanel implements ActionListener{
                 applex = rd.nextInt((WIDTH/TILE))*TILE;
                 appley = rd.nextInt((HEIGHT/TILE))*TILE;
             }
+    }
+    public void checkScore(){
+        if (apples > bestScore){
+            bestScore = apples;
+        }else  bestScore = bestScore;
+
     }
 
 //moving snake
@@ -190,7 +202,7 @@ public class MyPanel extends JPanel implements ActionListener{
         }
 //End screen text
         public void end(Graphics g){
-            String endText = "The end. Your score was: " + apples + " Press anything to reset";
+            String endText = "The end. Your score was: " + apples + ". Press anything to reset ";
             this.setBackground(Color.BLACK);
             g.setColor(Color.blue);
             g.setFont(font);

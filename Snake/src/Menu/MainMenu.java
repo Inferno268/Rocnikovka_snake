@@ -1,5 +1,5 @@
 package Menu;
-
+import Window.PracticeFrame;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -14,8 +14,6 @@ public class MainMenu extends JFrame implements ActionListener,Runnable {
     JButton very_hard = new JButton("Very Hard");
     JButton hard = new JButton("Hard");
     JButton practice = new JButton("Practice close moves");
-    MenuText text = new MenuText();
-
     public Thread t1;
 
     public void thread(){
@@ -72,7 +70,7 @@ public class MainMenu extends JFrame implements ActionListener,Runnable {
         }
         else if(e.getSource()==practice){
             this.dispose();
-            new MyFrame().create(11);
+            new PracticeFrame().create();
         }
     }
 
